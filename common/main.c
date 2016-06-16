@@ -230,12 +230,6 @@ static __inline__ int abortboot(int bootdelay)
 	}
 #endif
 
-	if(reset_button_status()){
-		printf("\n\nButton was pressed...\nHTTP server is starting for firmware update...\n\n");
-		NetLoopHttpd();
-		bootdelay = -1;
-	}
-
 #ifdef CONFIG_MENUPROMPT
 	printf(CONFIG_MENUPROMPT, bootdelay);
 #else
