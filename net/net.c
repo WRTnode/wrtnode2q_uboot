@@ -101,13 +101,6 @@ DECLARE_GLOBAL_DATA_PTR;
 # define ARP_TIMEOUT_COUNT  (CONFIG_NET_RETRY_COUNT)
 #endif
 
-unsigned char *webfailsafe_data_pointer = NULL;
-int	webfailsafe_is_running = 0;
-int	webfailsafe_ready_for_upgrade = 0;
-int	webfailsafe_upgrade_type = WEBFAILSAFE_UPGRADE_TYPE_FIRMWARE;
-
-void NetReceiveHttpd(volatile uchar * inpkt, int len);
-
 extern int do_reset(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]);
 
 #if 0
@@ -1225,11 +1218,6 @@ NetReceive(volatile uchar * inpkt, int len)
 		return;
 	}
 #endif
-
-	if(webfailsafe_is_running){
-		NetReceiveHttpd(inpkt, len);
-		return;
-	}
 
         NetRxPkt = inpkt;
 	NetRxPktLen = len;
